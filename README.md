@@ -2,6 +2,9 @@ LaTeX-MLA
 =========
 
 Original source by Ryan Aycock, adaptation by four04 and computerguy505 on GitHub.
+The original work was written under the LaTeX public license.<br>
+The most recent version of said license is located at:<br>
+www.latex-project.org/lppl.txt
 
 <b>To Use</b>
 ------
