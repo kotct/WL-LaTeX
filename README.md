@@ -1,5 +1,5 @@
-LaTeX-MLA
-=========
+WL-LaTeX
+========
 
 Original source by Ryan Aycock, adaptation by four04 and computerguy505 on GitHub.
 The original work was written under the LaTeX public license.<br>
