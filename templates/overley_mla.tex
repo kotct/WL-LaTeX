@@ -1,0 +1,30 @@
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage{mla}
+\usepackage{natbib}
+\usepackage[hyphens]{url}
+
+\begin{document}
+
+\begin{mla}{Christopher}{Cooper}{Teacher}{Class}{date}{Title}
+
+%body here
+
+
+%for in-text citations, do \citep{key}
+
+%citations:
+\begingroup
+\renewcommand{\section}[2]{}
+\begin{workscited}
+%\bibent
+
+\bibliographystyle{overley}
+\bibliography{database}
+
+\end{workscited}
+\endgroup
+
+\end{mla}
+
+\end{document}
