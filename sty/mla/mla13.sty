@@ -16,7 +16,7 @@
 }
 \usepackage{times}
 
-%Formatting Commands
+% formatting commands
 \renewcommand \thesection {\@arabic\c@section.}
 \renewcommand\thesubsection   {\thesection\@arabic\c@subsection}
 \renewcommand\section{\@startsection{section}{1}{\z@}%
@@ -98,3 +98,11 @@
   {\list{}{\listparindent=0.25in\itemindent=\listparindent\topsep=0pt\setlength{\leftmargin}{1in}\parsep        \z@ \@plus\p@}%
    \item\relax}
   {\endlist}
+
+% Purdue OWL's example paper has raggedright spacing
+\raggedright
+
+% no one wants to explicitly call those two, right?
+% works cited is not created if no bibliography file is stated
+\AtBeginDocument{\makeheader}
+\AtEndDocument{\makeworkscited}
