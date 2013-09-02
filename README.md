@@ -2,75 +2,8 @@ WL-LaTeX
 ========
 
 A collection of LaTeX related-files that are intended to be useful at WLCSC.
-
-Getting Started with LaTeX
---------------------------
-
-### Linux
-
-There are two options to setting up LaTeX on Linux.
-You can either install it from [the TeXLive website](http://www.tug.org/texlive/) or via your package manager.
-If installing it from the TeXLive website, you do not need to worry about installing Biber.
-It comes with the TeXLive distribution.
-Below are instructions directed towards those using their package manager, but can work for someone using the TeXLive website.
-
-From the package manager, install the `texlive` package.
-You can now compile LaTeX with `latex`, `pdflatex`, or something else!
-This is not recommended, however.
-It is suggested that you then install the `latexmk` package.
-On Fedora 19, be sure not to accidentally install the `latex-mk` package, as that is something different.
-This package will make compiling stuff easier when you are using BibTeX or something similar, when you need more than one command to compile.
-The following code is suggested for customizing latexmk to work nicer.
-You can add it to your `.bashrc` file.
-
-```bash
-# Alias latexmk to make as pdf and clean up
-latex_make() {
-	# list of additional to extensions to delete
-	# latexmk doesn't necessarily agree with these
-	delete=(run.xml bbl)
-	
-	if [ ! -z "$1" ]
-	then
-		nopath=$(basename "$1")
-		file="${nopath%.*}"
-		
-		latexmk "$file" -pdf
-		latexmk "$file" -c
-		
-		for i in "${delete[@]}"
-		do
-			if [ -e "$file.$i" ]
-			then
-				rm "$file.$i"
-			fi
-		done
-	else
-		latexmk -h
-	fi
-}
-
-alias latexmk=latex_make
-```
-
-This function and alias will make you be able to simply call `latexmk filename` and the PDF will be created for you, with no other annoying files around.
-If you do not want PDFs to be created or do not want cleaning, then you do not need the function and alias at all.
-
-Now you have easy LaTeX compilation set up, so the next step is to prepare for compiling files using mla13.
-If you currently try to compile the MLA template, you will find that no citations are listed.
-This is because mla13 requires Biber, which does not come with TeXLive on Linux because the Linux TeXLive is out-of-date.
-Sadly, just installing the `biber` package cannot be done, because it does not exist.
-We then need to add a custom repository.
-For Fedora, it would be [fedora-biber](http://repos.fedorapeople.org/repos/mef/biber/fedora-biber.repo).
-Add the file in `/etc/yum.repos.d`.
-Now, you can try to install the `biber` package.
-Sadly, there is a broken dependency.
-To fix that, you will need to install the Fedora 18 version of the package.
-You can find it on [this webpage](http://www.mail-archive.com/texlive@linux.cz/msg00579.html) (follow the link that the person provided in response).
-After installing that package, you can install the `biber` package and now you are ready to compile.
-
-Now `latexmk mla` will compile the template file.
-You can see the citations now work, due to Biber.
+To see a guide for getting started with LaTeX, see the file [`gettingstarted.md`](gettingstarted.md).
+A guide for installing these files into your LaTeX distribution might be made in the future.
 
 sty/mla13.sty
 -----------
