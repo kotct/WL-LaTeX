@@ -99,11 +99,8 @@
    \item\relax}
   {\endlist}
 
-% Purdue OWL's example paper has raggedright spacing
-% Fix indentation bug with ragged right
-%\raggedright
-
 % no one wants to explicitly call those two, right?
 % works cited is not created if no bibliography file is stated
-\AtBeginDocument{\makeheader}
+% header sets up ragged right spacing because Purdue OWL's example paper uses it
+\AtBeginDocument{\makeheader\newlength{\saveparindent}\setlength{\saveparindent}{\parindent}\raggedright\setlength{\parindent}{\saveparindent}}
 \AtEndDocument{\makeworkscited}
