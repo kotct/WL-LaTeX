@@ -9,7 +9,6 @@ Compiling
 ---------
 
 For compiling a paper using mla13, using Latexmk with some customizations is recommended.
-Having Biber installed is required for using mla13, as BibTeX does not work for some reason.
 If compiling fails for some reason, see [`gettingstarted.md`](gettingstarted.md).
 If that does not help, report an issue and it will be looked at.
 Help will be provided.
