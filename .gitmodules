@@ -1,0 +1,3 @@
+[submodule "sty/mla/mla13"]
+	path = sty/mla/mla13
+	url = git://github.com/Sammidysam/mla13.git
