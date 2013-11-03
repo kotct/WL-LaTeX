@@ -1,0 +1,111 @@
+\ProvidesPackage{overley}
+\usepackage{ifpdf}
+\usepackage[letterpaper]{geometry}
+\ProcessOptions\relax
+\setlength{\parindent}{0.5in}
+\usepackage{natbib}
+\usepackage[hyphens]{url}
+\usepackage{color}
+\usepackage{hyperref}
+\bibliographystyle{overley}
+\def\@sources{ }
+\newcommand{\sources}[1]{
+  \def\@sources{#1}
+}
+\usepackage{times}
+
+% formatting commands
+\renewcommand \thesection {\@arabic\c@section.}
+\renewcommand\thesubsection   {\thesection\@arabic\c@subsection}
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                                    {\z@}%
+                                    {\lineskip}%
+                                    {\center}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                       {\z@}%
+                                       {\lineskip}%
+                                       {\normalfont}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                          {\z@}%
+                                          {\lineskip}%
+                                          {\normalfont}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                      {\z@}%
+                                      {\lineskip}%
+                                      {\normalfont}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+                                         {\z@}%
+                                         {\lineskip}%
+                                         {\normalfont}}
+
+\geometry{top=1.0in,bottom=1.0in,left=1.0in,right=1.0in}
+\usepackage{datetime}
+\usepackage{fancyhdr}
+\linespread{2}
+\def\@firstname{ }
+\newcommand{\firstname}[1]{
+  \def\@firstname{#1}
+}
+\def\@lastname{ }
+\newcommand{\lastname}[1]{
+  \def\@lastname{#1}
+}
+\def\@professor{ }
+\newcommand{\professor}[1]{
+  \def\@professor{#1}
+}
+\def\@class{ }
+\newcommand{\class}[1]{
+  \def\@class{#1}
+}
+
+\pagestyle{empty}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt}
+\rhead{\@lastname\ \thepage}
+\newdateformat{datef}{\THEDAY\ \monthname[\THEMONTH] \THEYEAR}
+
+\newcommand*{\makeheader}{\begingroup
+\rmfamily
+\fontsize{12}{2}
+\noindent \@firstname\ \@lastname\\
+\@professor\\
+\@class\\
+\datef\@date
+\begin{center}\pdfbookmark{\@title}{\@title}
+\@title
+\end{center}
+\endgroup}
+% \author{\@firstname\ \@lastname}
+% \renewcommand{\@maketitle}{\makeheader}% JMC- not yet working with header
+
+\newcommand*{\makeworkscited}{\bibliography{\@sources}}
+
+\renewenvironment{quote}
+  {\list{}{\topsep=0pt\setlength{\leftmargin}{1in}\parsep        \z@ \@plus\p@}%
+   \item\relax}
+  {\endlist}
+
+\renewenvironment{quotation}
+  {\list{}{\listparindent=0.25in\itemindent=\listparindent\topsep=0pt\setlength{\leftmargin}{1in}\parsep        \z@ \@plus\p@}%
+   \item\relax}
+  {\endlist}
+  
+\renewcommand{\theenumi}{\Roman{enumi}. }
+\renewcommand{\labelenumi}{\theenumi}
+
+\renewcommand{\theenumii}{\Alph{enumii}. }
+\renewcommand{\labelenumii}{\theenumii}
+
+\renewcommand{\theenumiii}{\arabic{enumiii}. }
+\renewcommand{\labelenumiii}{\theenumiii}
+
+\renewcommand{\theenumiv}{\alph{enumiv}. }
+\renewcommand{\labelenumiv}{\theenumiv}
+
+% no one wants to explicitly call those two, right?
+% works cited is not created if no bibliography file is stated
+\AtBeginDocument{\makeheader\newlength{\saveparindent}\setlength{\saveparindent}{\parindent}\raggedright\setlength{\parindent}{\saveparindent}}
+\AtEndDocument{\makeworkscited}
