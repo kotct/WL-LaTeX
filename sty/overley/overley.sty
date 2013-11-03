@@ -22,7 +22,7 @@
                                     {\lineskip}%
                                     {\center}}
 \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
-                                       {\z@}%
+  {\z@}%
                                        {\lineskip}%
                                        {\normalfont}}
 \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
@@ -69,7 +69,7 @@
 
 \newcommand*{\makeheader}{\begingroup
 \rmfamily
-\fontsize{12}{2}
+\fontsize{10}{2}
 \noindent \@firstname\ \@lastname\\
 \@professor\\
 \@class\\
@@ -84,7 +84,7 @@
 \newcommand*{\makeworkscited}{\bibliography{\@sources}}
 
 \renewenvironment{quote}
-  {\list{}{\topsep=0pt\setlength{\leftmargin}{1in}\parsep        \z@ \@plus\p@}%
+                 {\list{}{\topsep=0pt\setlength{\leftmargin}{1in}\parsep        \z@ \@plus\p@}%
    \item\relax}
   {\endlist}
 
