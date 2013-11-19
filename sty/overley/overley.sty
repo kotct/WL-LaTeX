@@ -74,7 +74,8 @@
 \@professor\\
 \@class\\
 \datef\@date
-\begin{center}\pdfbookmark{\@title}{\@title}
+\begin{center}%\pdfbookmark{\@title}{\@title}
+  % \pdfbookmark breaks with command in title, such as \textit
 \@title
 \end{center}
 \endgroup}
@@ -108,4 +109,4 @@
 % no one wants to explicitly call those two, right?
 % works cited is not created if no bibliography file is stated
 \AtBeginDocument{\makeheader\newlength{\saveparindent}\setlength{\saveparindent}{\parindent}\raggedright\setlength{\parindent}{\saveparindent}}
-\AtEndDocument{\makeworkscited}
+\AtEndDocument{\pagebreak\makeworkscited}
