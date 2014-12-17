@@ -1,0 +1,192 @@
+\ProvidesPackage{schott}
+\usepackage{ifpdf}
+\usepackage[letterpaper]{geometry}
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\DeclareOption{annotation}{%
+      \PassOptionsToPackage{annotation}{biblatex}%
+   }
+\ProcessOptions\relax
+\setlength{\parindent}{0.5in}
+\usepackage[bibstyle=mla,citestyle=authoryear,urldate=comp,dateabbrev=false,dashed=false]{biblatex}
+\usepackage{color}
+\usepackage{hyperref}
+\newcommand{\sources}[1]{
+  \def\@sources{#1}
+  \addbibresource{#1}
+}
+\usepackage{times}
+\usepackage[doublespacing]{setspace}
+\usepackage[normalem]{ulem}
+
+%% BibLaTeX customization
+\DeclareFieldFormat{title:article}{#1\isdot}
+\DeclareFieldFormat{title:online}{#1\isdot}
+\DeclareFieldFormat{mla:capital:web}{}
+\DeclareFieldFormat{url}{\url{#1}}
+\renewcommand*{\nameyeardelim}{\addcomma\space}
+\renewbibmacro*{url+urldate}{%
+  \ifthenelse{\boolean{bbx@publimedium}\AND\NOT \(\iffieldundef{url} \AND \iffieldundef{eprint}\)}% 0.9 platypus - check the logic here! should it be and or or between url and eprint?
+  {\printfield[mla:capital:web]{url}\newunit}%
+  {\iffieldundef{urlyear}{}{\setunit{\addspace}}}%
+  \iffieldundef{urlyear}%
+               {}%
+               {\printtext{Retrieved \printurldate\ from}%
+                 \setunit{\addspace}}% Suggested by Stephen Brumbaugh
+               \ifthenelse{\boolean{bbx@publimedium}\AND\NOT\iffieldundef{url}}%
+                          {\ifthenelse{\boolean{bbx:gnoreminfo}}%
+                            {}%
+                            {%
+                              \printfield{url}}}%
+                          {\printfield{url}}%
+}
+\renewbibmacro*{mlabelnamepunct}{\setunit{\labelnamepunct}\printdate\setunit{\addperiod\addspace}\newblock}
+\renewbibmacro*{publisher+location+date}{%
+  \printlist{location}%
+  \iflistundef{publisher}%
+              {\setunit*{\addcomma\space}}%
+              {\setunit*{\addcolon\space}}%
+              \printlist{publisher}%
+              \setunit*{\addcomma\space}%
+              \newunit}
+\renewbibmacro*{mla:article:journal+issuetitle}{%
+  \usebibmacro{issue}%
+  \newunit\newblock%
+  \iffieldundef{issuetitle}%
+               {}%
+               {\usebibmacro{byeditor+others}%
+                 \newunit\newblock%
+                 \bibstring{specissue}\setunit*{\addspace}}%
+               \ifthenelse{\iffieldequalstr{entrytype}{periodical} \AND \iffieldundef{journaltitle}}%
+                          {\usebibmacro{periodical}}%
+                          {\usebibmacro{journal}}%
+                          \ifthenelse{\iffieldequalstr{entrytype}{online}}{\usebibmacro{mla:online}}{\setunit*{\addspace}}%
+                          \ifthenelse{\iffieldequalstr{entrysubtype}{newspaper} \or \iffieldequalstr{entrysubtype}{magazine} \or \iffieldequalstr{entrytype}{online}}%
+                                     {\printlist[brackets]{location}%
+                                       \setunit*{\addcomma\addspace}%
+                                       \printfield{version}%
+                                       \setunit{\addspace}%
+                                       \printtext{\thefield{volume}}%
+                                       \setunit*{\addcomma\addspace}%
+                                       \printfield[mla:newspaper:section]{chapter}%
+                                     }%
+                                     {\printfield{series}%
+                                       \setunit*{\addspace}%
+                                       \printfield{volume}%
+                                       \setunit*{\adddot}%
+                                       \printfield{number}\clearfield{number}%
+                                       \setunit*{\addcomma\space}%
+                                       \usebibmacro{mla:isbn/issn+doi+eprint}%
+                                       \setunit{\addspace}% platypus-1.0b removed asterisk
+                                       \usebibmacro{issue+date}%
+                                       \newunit\newblock
+                                       \newunit}%
+}
+\DefineBibliographyExtras{american}{%
+  \protected\def\mkbibdatelong#1#2#3{%
+                 \iffieldundef{#2}
+                              {}
+                              {\mkbibmonth{\thefield{#2}}%
+                                \iffieldundef{#3}{}{\space\stripzeros{\thefield{#3}},}%
+                                \iffieldundef{#1}{}{\space}}%
+                              \stripzeros{\thefield{#1}}}%
+  \protected\def\mkbibdateshort#1#2#3{%
+    \iffieldundef{#3}
+                 {}
+                 {\mkdatezeros{\thefield{#3}}%
+                   \iffieldundef{#2}{}{/}}%
+                 \iffieldundef{#2}
+                              {}
+                              {\mkdatezeros{\thefield{#2}}%
+                                \iffieldundef{#1}{}{/}}%
+                              \mkdatezeros{\thefield{#1}}}%
+}
+\DefineBibliographyStrings{english}{%
+  references = {References},
+  print = {}
+}
+
+% formatting commands
+\renewcommand \thesection {\@arabic\c@section.}
+\renewcommand\thesubsection   {\thesection\@arabic\c@subsection}
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                                    {\z@}%
+                                    {\lineskip}%
+                                    {\center}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+  {\z@}%
+                                       {\lineskip}%
+                                       {\normalfont}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                          {\z@}%
+                                          {\lineskip}%
+                                          {\normalfont}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                      {\z@}%
+                                      {\lineskip}%
+                                      {\normalfont}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+                                         {\z@}%
+                                         {\lineskip}%
+                                         {\normalfont}}
+                                         
+\DeclareUrlCommand\url@@{%
+  \def\UrlFont{\rmfamily}%
+  \def\UrlLeft{\uline\bgroup}%
+  \def\UrlRight{\egroup}}
+\def\url@#1{\hyper@linkurl{\url@@{#1}}{#1}}
+\DeclareRobustCommand*\url{\hyper@normalise\url@}
+
+\geometry{top=1in,bottom=1in,left=1in,right=1in}
+\usepackage{datetime}
+\def\@firstname{ }
+\newcommand{\firstname}[1]{
+  \def\@firstname{#1}
+}
+\def\@lastname{ }
+\newcommand{\lastname}[1]{
+  \def\@lastname{#1}
+}
+\def\@professor{ }
+\newcommand{\professor}[1]{
+  \def\@professor{#1}
+}
+\def\@class{ }
+\newcommand{\class}[1]{
+  \def\@class{#1}
+}
+
+\pagestyle{empty}
+\newdateformat{datef}{\THEDAY\ \monthname[\THEMONTH] \THEYEAR}
+
+\newcommand*{\makeheader}{\begingroup
+\rmfamily
+\fontsize{11}{1}
+\noindent \@firstname\ \@lastname\\
+\@professor\\
+\@class\\
+\datef\@date
+\begin{center}%\pdfbookmark{\@title}{\@title}
+  % \pdfbookmark breaks with command in title, such as \textit
+\@title
+\end{center}
+\endgroup}
+% \author{\@firstname\ \@lastname}
+% \renewcommand{\@maketitle}{\makeheader}% JMC- not yet working with header
+
+\newcommand*{\makeworkscited}{\printbibliography}
+
+\renewenvironment{quote}
+                 {\list{}{\topsep=0pt\setlength{\leftmargin}{1in}\parsep        \z@ \@plus\p@}%
+   \item\relax}
+  {\endlist}
+
+\renewenvironment{quotation}
+  {\list{}{\listparindent=0.25in\itemindent=\listparindent\topsep=0pt\setlength{\leftmargin}{1in}\parsep        \z@ \@plus\p@}%
+   \item\relax}
+  {\endlist}  
+
+% no one wants to explicitly call those two, right?
+% works cited is not created if no bibliography file is stated
+\AtBeginDocument{\makeheader\newlength{\saveparindent}\setlength{\saveparindent}{\parindent}\raggedright\setlength{\parindent}{\saveparindent}}
+\AtEndDocument{\pagebreak\makeworkscited}
