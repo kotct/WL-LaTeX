@@ -49,6 +49,12 @@ latex_make() {
 				rm "$file.$i"
 			fi
 		done
+		
+		# Sometimes this file is made, and it is annoying.
+		if [ -e "$file-blx.bib" ]
+		then
+			rm "$file-blx.bib"
+		fi
 	else
 		latexmk -h
 	fi
