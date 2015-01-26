@@ -7,12 +7,12 @@ There are two options to setting up LaTeX on Linux.
 You can either install it from [the TeXLive website](http://www.tug.org/texlive/) or via your package manager.
 Either way is a completely viable option.
 
-Also make sure that you have biblatex or biber installed, and that you have the mla13.sty file installed globally.
+Also make sure that you have BibLaTeX or Biber installed, and that you have the mla13.sty file installed either in your project root or globally.
 
 Fedora
 ------
 
-These instructions were done for Fedora 19.
+These instructions were created for Fedora 19.
 If something does not work, open an issue.
 If you installed via the TeXLive website, you can skip the installation of TeXLive and Latexmk.
 The customization of Latexmk should also still be done.
