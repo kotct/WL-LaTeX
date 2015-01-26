@@ -7,6 +7,8 @@ There are two options to setting up LaTeX on Linux.
 You can either install it from [the TeXLive website](http://www.tug.org/texlive/) or via your package manager.
 Either way is a completely viable option.
 
+Also make sure that you have biblatex or biber installed, and that you have the mla13.sty file installed globally.
+
 Fedora
 ------
 
@@ -31,15 +33,15 @@ latex_make() {
 	# list of additional to extensions to delete
 	# latexmk doesn't necessarily agree with these
 	delete=(run.xml bbl)
-	
+
 	if [ ! -z "$1" ]
 	then
 		nopath=$(basename "$1")
 		file="${nopath%.*}"
-		
+
 		latexmk "$file" -pdf
 		latexmk "$file" -c
-		
+
 		for i in "${delete[@]}"
 		do
 			if [ -e "$file.$i" ]
