@@ -17,7 +17,7 @@ sty/mla13.sty
 -----------
 
 The version in this repository is a modified version of [jmclawson](https://github.com/jmclawson)'s [fork](https://github.com/jmclawson/mla13) of [mla13](https://github.com/jackson13info/mla13) by [jackson13info](https://github.com/jackson13info).
-Sam Craig (@Sammidysam) has made the modifications to this file.
+Sam Craig (Sammidysam) has made the modifications to this file.
 
 For templates, see the `templates/mla/` folder.
 For examples, see the `examples/mla/` folder.
